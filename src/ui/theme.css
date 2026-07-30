@@ -1,0 +1,328 @@
+@import "tailwindcss";
+
+/* =========================================================================
+ * WA Tools — Design tokens (fonte da verdade, ui-contract.md)
+ * Dark-first, editorial, inconfundivelmente "nosso". Tailwind v4 CSS-first.
+ * Regra de gate: NENHUM valor de cor/spacing hardcoded em componente —
+ * tudo via os tokens abaixo. Sem fontes remotas (system-first).
+ * ========================================================================= */
+
+@theme {
+  /* Fundos em camadas (dark-first) */
+  --wt-bg: #0a0a0c;
+  --wt-surface: #141518;
+  --wt-surface-2: #1e2025;
+  --wt-border: #2a2d34;
+
+  /* Tipografia (cor) */
+  --wt-text: #f5f6f8;
+  --wt-text-dim: #9aa2b1;
+
+  /* Estado ativo/garantido — íris (deliberadamente NÃO o verde do WhatsApp) */
+  --wt-accent: #8b7dff;
+  --wt-accent-contrast: #0a0a0c;
+
+  /* Falha-segura / lockout */
+  --wt-warn: #f5b13d;
+  --wt-danger: #ff5d63;
+
+  /* Raio */
+  --wt-radius: 12px;
+  --wt-radius-sm: 8px;
+  --wt-radius-pill: 999px;
+
+  /* Escala de espaçamento */
+  --wt-space-1: 4px;
+  --wt-space-2: 8px;
+  --wt-space-3: 12px;
+  --wt-space-4: 20px;
+
+  /* Tipografia (famílias) — embutidas/sistema, zero rede */
+  --wt-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    system-ui, "Helvetica Neue", Arial, sans-serif;
+  --wt-font-mono: "SF Mono", "JetBrains Mono", "Fira Code", ui-monospace,
+    "Cascadia Code", Menlo, Consolas, monospace;
+
+  /* Tipografia (escala/peso) — evita hardcode de tamanho nos componentes */
+  --wt-text-xs: 11px;
+  --wt-text-sm: 13px;
+  --wt-text-md: 14px;
+  --wt-text-lg: 16px;
+  --wt-weight-medium: 500;
+  --wt-weight-semibold: 600;
+
+  /* Primitivas de componente (dimensões tokenizadas) */
+  --wt-panel-w: 340px;
+  --wt-switch-track-w: 40px;
+  --wt-switch-track-h: 24px;
+}
+
+/* -------------------------------------------------------------------------
+ * Variante clara (opcional) — respeita o tema do SO. Dark continua o padrão.
+ * Declarações fora de @layer vencem os tokens do @theme (que ficam na layer
+ * `theme`), então estes overrides se aplicam sempre que o SO estiver em claro.
+ * ------------------------------------------------------------------------- */
+@media (prefers-color-scheme: light) {
+  :root {
+    --wt-bg: #ffffff;
+    --wt-surface: #ffffff;
+    --wt-surface-2: #f4f5f7;
+    --wt-border: #e4e7ec;
+
+    --wt-text: #0c0d10;
+    --wt-text-dim: #5a6373;
+
+    /* Íris mais escura p/ contraste AA sobre superfícies claras */
+    --wt-accent: #5b4fe6;
+    --wt-accent-contrast: #ffffff;
+
+    /* Âmbar/vermelho escurecidos p/ AA como texto sobre claro */
+    --wt-warn: #b25c00;
+    --wt-danger: #d92d20;
+  }
+
+  .wt-root {
+    color-scheme: light;
+  }
+}
+
+/* =========================================================================
+ * Base + primitivas de UI (namespaced em .wt-root — não vaza p/ o WhatsApp)
+ * ========================================================================= */
+
+.wt-root {
+  color-scheme: dark;
+  font-family: var(--wt-font);
+  color: var(--wt-text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  line-height: 1.35;
+}
+
+.wt-root *,
+.wt-root *::before,
+.wt-root *::after {
+  box-sizing: border-box;
+}
+
+.wt-root :is(button, [role="switch"]):focus-visible {
+  outline: 2px solid var(--wt-accent);
+  outline-offset: 2px;
+}
+
+/* --- Painel --------------------------------------------------------------- */
+.wt-panel {
+  display: flex;
+  flex-direction: column;
+  inline-size: var(--wt-panel-w);
+  max-inline-size: 100%;
+  background: var(--wt-surface);
+  color: var(--wt-text);
+  border: 1px solid var(--wt-border);
+  border-radius: var(--wt-radius);
+  overflow: clip;
+  box-shadow: 0 24px 48px -28px color-mix(in oklab, var(--wt-bg) 85%, transparent);
+}
+
+.wt-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wt-space-2);
+  padding: var(--wt-space-3) var(--wt-space-4);
+  border-bottom: 1px solid var(--wt-border);
+}
+
+.wt-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wt-space-2);
+  font-size: var(--wt-text-md);
+  font-weight: var(--wt-weight-semibold);
+  letter-spacing: -0.01em;
+  color: var(--wt-text);
+}
+
+.wt-brand__mark {
+  display: grid;
+  place-items: center;
+  inline-size: 22px;
+  block-size: 22px;
+  border-radius: var(--wt-radius-sm);
+  background: var(--wt-accent);
+  color: var(--wt-accent-contrast);
+}
+
+.wt-panel__subtitle {
+  font-size: var(--wt-text-xs);
+  color: var(--wt-text-dim);
+}
+
+.wt-panel__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wt-space-1);
+  padding: var(--wt-space-2);
+}
+
+.wt-panel__footer {
+  padding: var(--wt-space-2) var(--wt-space-4) var(--wt-space-4);
+}
+
+/* --- Linha de toggle ------------------------------------------------------ */
+.wt-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--wt-space-3);
+  padding: var(--wt-space-3) var(--wt-space-4);
+  border-radius: var(--wt-radius);
+  transition: background-color 0.16s ease;
+}
+
+.wt-row:hover {
+  background: color-mix(in oklab, var(--wt-text) 4%, transparent);
+}
+
+.wt-row__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wt-space-1);
+  min-inline-size: 0;
+}
+
+.wt-row__label {
+  font-size: var(--wt-text-md);
+  font-weight: var(--wt-weight-medium);
+  color: var(--wt-text);
+}
+
+.wt-row__desc {
+  font-size: var(--wt-text-sm);
+  color: var(--wt-text-dim);
+}
+
+/* --- Estado de sinal (texto + ícone) -------------------------------------- */
+.wt-signal-state {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wt-space-1);
+  font-size: var(--wt-text-xs);
+  font-weight: var(--wt-weight-medium);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* --- Switch --------------------------------------------------------------- */
+.wt-switch {
+  position: relative;
+  flex: 0 0 auto;
+  inline-size: var(--wt-switch-track-w);
+  block-size: var(--wt-switch-track-h);
+  padding: 0;
+  border: 1px solid var(--wt-border);
+  border-radius: var(--wt-radius-pill);
+  background: var(--wt-surface-2);
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.wt-switch[data-on="true"] {
+  background: var(--wt-accent);
+  border-color: var(--wt-accent);
+}
+
+.wt-switch__knob {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: var(--wt-space-1);
+  inline-size: calc(var(--wt-switch-track-h) - var(--wt-space-1) * 2);
+  block-size: calc(var(--wt-switch-track-h) - var(--wt-space-1) * 2);
+  border-radius: var(--wt-radius-pill);
+  background: var(--wt-text);
+  transform: translateY(-50%);
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+
+.wt-switch[data-on="true"] .wt-switch__knob {
+  background: var(--wt-accent-contrast);
+  transform: translateY(-50%)
+    translateX(calc(var(--wt-switch-track-w) - var(--wt-switch-track-h)));
+}
+
+/* --- Banner de falha-segura (não-bloqueante) ------------------------------ */
+.wt-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--wt-space-2);
+  padding: var(--wt-space-3);
+  border-radius: var(--wt-radius);
+  border: 1px solid color-mix(in oklab, var(--wt-warn) 40%, transparent);
+  background: color-mix(in oklab, var(--wt-warn) 12%, var(--wt-surface));
+  color: var(--wt-text);
+}
+
+.wt-banner__icon {
+  flex: 0 0 auto;
+  color: var(--wt-warn);
+  margin-block-start: 1px;
+}
+
+.wt-banner__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wt-space-1);
+  min-inline-size: 0;
+}
+
+.wt-banner__title {
+  font-size: var(--wt-text-sm);
+  font-weight: var(--wt-weight-semibold);
+  color: var(--wt-warn);
+}
+
+.wt-banner__msg {
+  font-size: var(--wt-text-sm);
+  color: var(--wt-text);
+}
+
+.wt-banner__dismiss {
+  display: grid;
+  place-items: center;
+  margin-inline-start: auto;
+  padding: var(--wt-space-1);
+  border: 0;
+  border-radius: var(--wt-radius-sm);
+  background: transparent;
+  color: var(--wt-text-dim);
+  cursor: pointer;
+  transition: color 0.16s ease, background-color 0.16s ease;
+}
+
+.wt-banner__dismiss:hover {
+  color: var(--wt-text);
+  background: color-mix(in oklab, var(--wt-text) 8%, transparent);
+}
+
+/* --- Movimento: spinner + respeito a prefers-reduced-motion --------------- */
+.wt-spin {
+  transform-origin: center;
+  animation: wt-spin 0.8s linear infinite;
+}
+
+@keyframes wt-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wt-root *,
+  .wt-root *::before,
+  .wt-root *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
