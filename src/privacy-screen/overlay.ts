@@ -29,8 +29,10 @@ export const SELECTORS = {
   /** Nomes: linhas da lista (principal + arquivadas/busca) + cabeçalho da conversa. */
   names:
     '#pane-side [role="row"] span[title][dir="auto"], [role="listitem"] span[title][dir="auto"], #main header span[dir="auto"]',
-  /** Fotos de perfil (avatares): lista lateral, arquivadas e cabeçalho. */
-  photos: '#pane-side [role="row"] img, [role="listitem"] img, #main header img',
+  /** Fotos de perfil: o avatar é um SVG com <image> dentro (NÃO um <img> HTML) —
+   *  por isso cobrimos svg:has(image) + img, em todas as views. */
+  photos:
+    '#pane-side [role="row"] :is(svg:has(image), img), [role="listitem"] :is(svg:has(image), img), #main header :is(svg:has(image), img)',
   /** Prévia da última mensagem em cada linha (principal + arquivadas). */
   recent:
     '#pane-side [role="row"] [role="gridcell"]:last-child span[dir], [role="listitem"] [role="gridcell"]:last-child span[dir]',

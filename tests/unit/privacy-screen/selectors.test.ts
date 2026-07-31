@@ -20,6 +20,10 @@ describe('SELECTORS — cobertura de todas as views (anti-vazamento)', () => {
     expect(SELECTORS.photos).toContain('[role="listitem"]');
   });
 
+  it('photos cobre o avatar SVG (<image>), não só <img> — o avatar do WhatsApp é SVG', () => {
+    expect(SELECTORS.photos).toContain('svg:has(image)');
+  });
+
   it('recent (prévias) cobre row e listitem', () => {
     expect(SELECTORS.recent).toContain('[role="row"]');
     expect(SELECTORS.recent).toContain('[role="listitem"]');
