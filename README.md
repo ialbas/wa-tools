@@ -24,6 +24,8 @@ Fora de escopo por design: recuperação de mensagens apagadas/view-once e envio
 - Nenhuma chamada de rede a servidores próprios ou de terceiros. Configurações só em `chrome.storage.local`.
 - Não lê nem armazena o conteúdo das mensagens — mexe apenas nos metadados de saída (presença/recibos) e numa camada visual local.
 
+Política completa: [PRIVACY.md](./PRIVACY.md).
+
 ## Stack
 
 WXT (Manifest V3) · React 18 · Tailwind CSS v4 · TypeScript · Zod · Zustand · Vitest. A ocultação de sinais usa [WA-JS](https://github.com/wppconnect-team/wa-js) sob namespace isolado.
