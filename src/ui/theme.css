@@ -37,9 +37,10 @@
   --wt-space-3: 12px;
   --wt-space-4: 20px;
 
-  /* Tipografia (famílias) — embutidas/sistema, zero rede */
-  --wt-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    system-ui, "Helvetica Neue", Arial, sans-serif;
+  /* Tipografia (famílias) — MESMA stack do WhatsApp Web (Roboto Variable, que a
+   * própria página já carrega e o shadow root herda). Zero rede da nossa parte. */
+  --wt-font: "Roboto Variable", Roboto, "Helvetica Neue", Helvetica,
+    -apple-system, "Segoe UI", system-ui, Arial, sans-serif;
   --wt-font-mono: "SF Mono", "JetBrains Mono", "Fira Code", ui-monospace,
     "Cascadia Code", Menlo, Consolas, monospace;
 

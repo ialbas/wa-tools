@@ -22,7 +22,9 @@ const surface: React.CSSProperties = {
   background: 'var(--wt-surface)',
   color: 'var(--wt-text)',
   borderRadius: 'var(--wt-radius, 12px)',
-  font: 'var(--wt-font, 14px/1.4 system-ui, sans-serif)',
+  fontFamily: 'var(--wt-font)', // mesma fonte do WhatsApp (Roboto Variable)
+  fontSize: 14,
+  lineHeight: 1.4,
 };
 
 /**
@@ -79,6 +81,7 @@ export function ContentApp() {
 
   return (
     <div
+      className="wt-root"
       style={{
         ...surface,
         position: 'fixed',

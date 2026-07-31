@@ -24,8 +24,10 @@ describe('SELECTORS — cobertura de todas as views (anti-vazamento)', () => {
     expect(SELECTORS.photos).toContain('svg:has(image)');
   });
 
-  it('recent (prévias) cobre row e listitem', () => {
+  it('recent (prévias) cobre row e listitem, sem exigir dir', () => {
     expect(SELECTORS.recent).toContain('[role="row"]');
     expect(SELECTORS.recent).toContain('[role="listitem"]');
+    // mensagens de sistema/reações não têm dir — não podemos exigir span[dir]
+    expect(SELECTORS.recent).not.toContain('span[dir]');
   });
 });

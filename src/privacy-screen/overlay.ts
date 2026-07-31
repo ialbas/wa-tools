@@ -33,9 +33,10 @@ export const SELECTORS = {
    *  por isso cobrimos svg:has(image) + img, em todas as views. */
   photos:
     '#pane-side [role="row"] :is(svg:has(image), img), [role="listitem"] :is(svg:has(image), img), #main header :is(svg:has(image), img)',
-  /** Prévia da última mensagem em cada linha (principal + arquivadas). */
+  /** Prévia da última mensagem (inclui mensagens de sistema/reações/"mudou a
+   *  descrição", que ficam em span SEM dir) — cobrimos todo span do gridcell da prévia. */
   recent:
-    '#pane-side [role="row"] [role="gridcell"]:last-child span[dir], [role="listitem"] [role="gridcell"]:last-child span[dir]',
+    '#pane-side [role="row"] [role="gridcell"]:last-child span, [role="listitem"] [role="gridcell"]:last-child span',
   /** Mensagens dentro da conversa aberta (linha inteira do balão). */
   conversation: '#main [role="row"]',
   /** Campo de composição (input de texto da conversa). */
