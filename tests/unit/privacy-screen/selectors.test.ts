@@ -24,8 +24,9 @@ describe('SELECTORS — cobertura de todas as views (anti-vazamento)', () => {
     expect(SELECTORS.photos).toContain('svg:has(image)');
   });
 
-  it('blindagem por região usa containers estáveis (imune ao DOM interno)', () => {
-    expect(SELECTORS.shieldList).toBe('#pane-side');
+  it('blindagem cobre lista principal (#pane-side) E arquivadas (listitem, fora de #pane-side)', () => {
+    expect(SELECTORS.shieldList).toContain('#pane-side');
+    expect(SELECTORS.shieldList).toContain('[role="listitem"]');
     expect(SELECTORS.shieldChat).toBe('#main');
   });
 

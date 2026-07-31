@@ -38,14 +38,16 @@ export const SELECTORS = {
    *  cobrindo mensagens de sistema/reações (que ficam em span SEM dir) em qualquer
    *  estrutura, sem borrar o nome quando "Nomes" estiver desligado. */
   recent:
-    '#pane-side [role="row"] [role="gridcell"] span:not([title]), [role="listitem"] [role="gridcell"] span:not([title])',
+    '#pane-side [role="row"] [role="gridcell"] span:not([title]), [role="listitem"] span:not([title]):not(:has(span))',
   /** Mensagens dentro da conversa aberta (linha inteira do balão). */
   conversation: '#main [role="row"]',
   /** Campo de composição (input de texto da conversa). */
   composer: '#main footer [contenteditable="true"], #main footer [role="textbox"]',
-  /** Blindagem por REGIÃO — o container inteiro da lista. Imune à estrutura interna
-   *  (não importa se as linhas são row/listitem/gridcell): se está na lista, borra. */
-  shieldList: '#pane-side',
+  /** Blindagem por REGIÃO — a lista principal (#pane-side) + as ARQUIVADAS, que
+   *  renderizam FORA de #pane-side (sob #app, container opaco sem id/role). As linhas
+   *  arquivadas são [role="listitem"]: blindar por linha cobre-as e dá reveal por linha.
+   *  Imune à estrutura interna: se é linha de conversa, borra. */
+  shieldList: '#pane-side, [role="listitem"]',
   /** Blindagem por REGIÃO — o container inteiro da conversa aberta. */
   shieldChat: '#main',
 } as const;
