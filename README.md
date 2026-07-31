@@ -4,6 +4,22 @@ Extensão de navegador (Chrome/Chromium, Manifest V3) que adiciona uma **camada 
 
 > ⚠️ Projeto independente, **não** afiliado, associado ou endossado pelo WhatsApp ou pela Meta. "WhatsApp" é marca da Meta.
 
+## Screenshots
+
+**Privacidade de tela — desfoque anti-espião**
+
+![Painel de privacidade e lista de conversas desfocada](docs/screenshots/01-painel-e-lista.png)
+
+**Conversa aberta protegida**
+
+![Conversa aberta com mensagens desfocadas](docs/screenshots/02-conversa-borrada.png)
+
+**Bloqueio por senha**
+
+![Tela de bloqueio por senha](docs/screenshots/03-bloqueio-por-senha.png)
+
+> Capturas de uma conta real com **todo o conteúdo desfocado pela própria extensão** — nada identificável.
+
 ## O que faz
 
 **Tela de privacidade (antiespionagem)** — funcionando:
