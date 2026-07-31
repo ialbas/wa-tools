@@ -1,6 +1,11 @@
 node_modules/
 .output/
 .wxt/
+
+# Tooling de desenvolvimento (não faz parte do produto — fora do repo público)
+.claude/
+.specify/
+
 dist/
 coverage/
 *.log
