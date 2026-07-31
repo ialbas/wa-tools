@@ -1,6 +1,6 @@
 {
   "name": "wa-tools",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "Camada de privacidade e ocultação para WhatsApp Web — 100% local, sem contas, sem rede.",
   "type": "module",
