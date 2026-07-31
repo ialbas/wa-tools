@@ -112,7 +112,21 @@ export function ContentApp() {
           fontWeight: 600,
         }}
       >
-        <span>WA Tools · Privacidade</span>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+          <svg width="18" height="18" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+            <rect x="8" y="8" width="112" height="112" rx="30" fill="var(--wt-surface-2)" />
+            <path
+              d="M50 28h28c12.15 0 22 9.85 22 22v14c0 12.15-9.85 22-22 22H52l-14.6 12.4c-1.96 1.66-4.96.27-4.96-2.3V85.2C34.9 82.4 28 74 28 64V50c0-12.15 9.85-22 22-22Z"
+              fill="var(--wt-accent)"
+            />
+            <circle cx="64" cy="52" r="9" fill="var(--wt-surface-2)" />
+            <path
+              d="M59.5 58.5 55.5 74a1.5 1.5 0 0 0 1.46 1.86h14.08A1.5 1.5 0 0 0 72.5 74l-4-15.5Z"
+              fill="var(--wt-surface-2)"
+            />
+          </svg>
+          WA Tools · Privacidade
+        </span>
         <span style={{ color: 'var(--wt-text-dim)' }}>{open ? '▾' : '▸'}</span>
       </button>
 
