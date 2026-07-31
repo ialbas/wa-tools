@@ -33,10 +33,12 @@ export const SELECTORS = {
    *  por isso cobrimos svg:has(image) + img, em todas as views. */
   photos:
     '#pane-side [role="row"] :is(svg:has(image), img), [role="listitem"] :is(svg:has(image), img), #main header :is(svg:has(image), img)',
-  /** Prévia da última mensagem (inclui mensagens de sistema/reações/"mudou a
-   *  descrição", que ficam em span SEM dir) — cobrimos todo span do gridcell da prévia. */
+  /** Prévia da última mensagem. Sem depender de :last-child (a estrutura muda entre
+   *  views/re-renders): pegamos todo span de gridcell que NÃO seja o nome (span[title]),
+   *  cobrindo mensagens de sistema/reações (que ficam em span SEM dir) em qualquer
+   *  estrutura, sem borrar o nome quando "Nomes" estiver desligado. */
   recent:
-    '#pane-side [role="row"] [role="gridcell"]:last-child span, [role="listitem"] [role="gridcell"]:last-child span',
+    '#pane-side [role="row"] [role="gridcell"] span:not([title]), [role="listitem"] [role="gridcell"] span:not([title])',
   /** Mensagens dentro da conversa aberta (linha inteira do balão). */
   conversation: '#main [role="row"]',
   /** Campo de composição (input de texto da conversa). */
