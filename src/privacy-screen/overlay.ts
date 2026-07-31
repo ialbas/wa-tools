@@ -19,17 +19,20 @@ import type { PrivacyScreenConfig } from '@/shared/schemas';
  *     (atributos ARIA/estruturais) para que a manutenção seja um único ponto.
  *     Cada valor pode ser uma lista de seletores separada por vírgula.
  * -------------------------------------------------------------------------- */
+// Verificado ao vivo contra web.whatsapp.com (build jul/2026): a lista usa
+// [role="row"] + [role="gridcell"] (não "listitem"); o nome de cada conversa é
+// um span[title][dir="auto"]. names→68 e photos→25 casam na tela real.
 export const SELECTORS = {
-  /** Nomes de contatos/grupos: títulos na lista lateral e no cabeçalho da conversa. */
-  names: '#pane-side [role="listitem"] span[title], header span[title]',
-  /** Fotos de perfil (avatares): lista lateral, cabeçalho e mensagens. */
-  photos: '#pane-side [role="listitem"] img, header img, #main img[draggable="false"]',
-  /** Prévia da última mensagem em cada item da lista lateral. */
-  recent: '#pane-side [role="listitem"] [role="gridcell"]:last-of-type',
-  /** Balões de mensagem dentro da conversa aberta. */
-  conversation: '#main .message-in, #main .message-out',
+  /** Nomes de contatos/grupos: título de cada linha da lista + cabeçalho da conversa. */
+  names: '#pane-side [role="row"] span[title][dir="auto"], #main header span[title][dir="auto"]',
+  /** Fotos de perfil (avatares): lista lateral e cabeçalho. */
+  photos: '#pane-side [role="row"] img, #main header img',
+  /** Prévia da última mensagem em cada linha da lista lateral. */
+  recent: '#pane-side [role="row"] [role="gridcell"]:last-child span[dir]',
+  /** Mensagens dentro da conversa aberta (linha inteira do balão). */
+  conversation: '#main [role="row"]',
   /** Campo de composição (input de texto da conversa). */
-  composer: 'footer [contenteditable="true"], footer [role="textbox"]',
+  composer: '#main footer [contenteditable="true"], #main footer [role="textbox"]',
 } as const;
 
 /* -------------------------------------------------------------------------- *
