@@ -19,16 +19,21 @@ import type { PrivacyScreenConfig } from '@/shared/schemas';
  *     (atributos ARIA/estruturais) para que a manutenção seja um único ponto.
  *     Cada valor pode ser uma lista de seletores separada por vírgula.
  * -------------------------------------------------------------------------- */
-// Verificado ao vivo contra web.whatsapp.com (build jul/2026): a lista usa
-// [role="row"] + [role="gridcell"] (não "listitem"); o nome de cada conversa é
-// um span[title][dir="auto"]. names→68 e photos→25 casam na tela real.
+// Verificado ao vivo contra web.whatsapp.com (build jul/2026). O WhatsApp renderiza
+// cada view num container/role diferente: a lista principal em #pane-side [role="row"];
+// ARQUIVADAS (e buscas) sob #app com [role="listitem"]; o nome no cabeçalho da conversa
+// é #main header span[dir="auto"] (SEM title). Por isso cobrimos row E listitem, de forma
+// container-agnóstica — cobrir a mais é o lado seguro numa tela de privacidade (um nome
+// que vaza derruba o propósito; um blur a mais, não).
 export const SELECTORS = {
-  /** Nomes de contatos/grupos: título de cada linha da lista + cabeçalho da conversa. */
-  names: '#pane-side [role="row"] span[title][dir="auto"], #main header span[title][dir="auto"]',
-  /** Fotos de perfil (avatares): lista lateral e cabeçalho. */
-  photos: '#pane-side [role="row"] img, #main header img',
-  /** Prévia da última mensagem em cada linha da lista lateral. */
-  recent: '#pane-side [role="row"] [role="gridcell"]:last-child span[dir]',
+  /** Nomes: linhas da lista (principal + arquivadas/busca) + cabeçalho da conversa. */
+  names:
+    '#pane-side [role="row"] span[title][dir="auto"], [role="listitem"] span[title][dir="auto"], #main header span[dir="auto"]',
+  /** Fotos de perfil (avatares): lista lateral, arquivadas e cabeçalho. */
+  photos: '#pane-side [role="row"] img, [role="listitem"] img, #main header img',
+  /** Prévia da última mensagem em cada linha (principal + arquivadas). */
+  recent:
+    '#pane-side [role="row"] [role="gridcell"]:last-child span[dir], [role="listitem"] [role="gridcell"]:last-child span[dir]',
   /** Mensagens dentro da conversa aberta (linha inteira do balão). */
   conversation: '#main [role="row"]',
   /** Campo de composição (input de texto da conversa). */
