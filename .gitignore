@@ -7,6 +7,9 @@ node_modules/
 .specify/
 specs/
 
+# Material de submissão / marketing (Chrome Web Store)
+store/
+
 dist/
 coverage/
 *.log
