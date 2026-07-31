@@ -14,11 +14,15 @@ const signalMapSchema = z.object(
 );
 
 export const privacyScreenConfigSchema = z.object({
+  // Granular (por categoria) — controle fino, seletores por elemento.
   blurNames: z.boolean(),
   blurPhotos: z.boolean(),
   blurRecent: z.boolean(),
   blurConversation: z.boolean(),
   blurComposer: z.boolean(),
+  // Blindado (por região) — borra o container inteiro; imune ao churn do DOM interno.
+  shieldList: z.boolean(),
+  shieldChat: z.boolean(),
   revealOnHover: z.boolean(),
 });
 
@@ -59,6 +63,8 @@ export function defaultPrivacyConfig(): PrivacyConfig {
       blurRecent: false,
       blurConversation: false,
       blurComposer: false,
+      shieldList: false,
+      shieldChat: false,
       revealOnHover: true,
     },
     optionalStatusViewing: false,

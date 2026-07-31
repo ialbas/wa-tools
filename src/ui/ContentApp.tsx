@@ -18,6 +18,12 @@ const BLUR_FIELDS: ReadonlyArray<{ key: keyof PrivacyScreenConfig; label: string
   { key: 'blurComposer', label: 'Campo de composição' },
 ];
 
+// Blindagem por região (robusta): borra o container inteiro, imune ao DOM interno.
+const SHIELD_FIELDS: ReadonlyArray<{ key: keyof PrivacyScreenConfig; label: string }> = [
+  { key: 'shieldList', label: 'Blindar a lista inteira' },
+  { key: 'shieldChat', label: 'Blindar a conversa aberta' },
+];
+
 const surface: React.CSSProperties = {
   background: 'var(--wt-surface)',
   color: 'var(--wt-text)',
@@ -149,6 +155,23 @@ export function ContentApp() {
             />
             Revelar ao passar o cursor
           </label>
+
+          <p style={{ color: 'var(--wt-text-dim)', margin: '12px 0 4px', fontSize: 12 }}>
+            Blindagem — robusto (borra o container inteiro)
+          </p>
+          {SHIELD_FIELDS.map((f) => (
+            <label
+              key={f.key}
+              style={{ display: 'flex', gap: 8, alignItems: 'center', padding: '4px 0' }}
+            >
+              <input
+                type="checkbox"
+                checked={config.privacyScreen[f.key]}
+                onChange={() => toggleBlur(f.key)}
+              />
+              {f.label}
+            </label>
+          ))}
 
           <hr style={{ border: 0, borderTop: '1px solid var(--wt-surface-2)', margin: '12px 0' }} />
 

@@ -43,6 +43,11 @@ export const SELECTORS = {
   conversation: '#main [role="row"]',
   /** Campo de composição (input de texto da conversa). */
   composer: '#main footer [contenteditable="true"], #main footer [role="textbox"]',
+  /** Blindagem por REGIÃO — o container inteiro da lista. Imune à estrutura interna
+   *  (não importa se as linhas são row/listitem/gridcell): se está na lista, borra. */
+  shieldList: '#pane-side',
+  /** Blindagem por REGIÃO — o container inteiro da conversa aberta. */
+  shieldChat: '#main',
 } as const;
 
 /* -------------------------------------------------------------------------- *
@@ -74,13 +79,15 @@ interface Target {
   readonly selector: string;
 }
 
-/** Os 5 alvos, na ordem de precedência visual (lista → conversa → composer). */
+/** Alvos: 5 granulares (por categoria) + 2 de região (blindagem). */
 const TARGETS: readonly Target[] = [
   { flag: 'blurNames', attr: 'data-wt-blur-names', selector: SELECTORS.names },
   { flag: 'blurPhotos', attr: 'data-wt-blur-photos', selector: SELECTORS.photos },
   { flag: 'blurRecent', attr: 'data-wt-blur-recent', selector: SELECTORS.recent },
   { flag: 'blurConversation', attr: 'data-wt-blur-conversation', selector: SELECTORS.conversation },
   { flag: 'blurComposer', attr: 'data-wt-blur-composer', selector: SELECTORS.composer },
+  { flag: 'shieldList', attr: 'data-wt-shield-list', selector: SELECTORS.shieldList },
+  { flag: 'shieldChat', attr: 'data-wt-shield-chat', selector: SELECTORS.shieldChat },
 ] as const;
 
 /* -------------------------------------------------------------------------- *

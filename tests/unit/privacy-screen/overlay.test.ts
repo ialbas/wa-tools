@@ -23,6 +23,8 @@ function cfg(overrides: Partial<PrivacyScreenConfig> = {}): PrivacyScreenConfig 
     blurRecent: false,
     blurConversation: false,
     blurComposer: false,
+    shieldList: false,
+    shieldChat: false,
     revealOnHover: false,
     ...overrides,
   };

@@ -24,6 +24,11 @@ describe('SELECTORS — cobertura de todas as views (anti-vazamento)', () => {
     expect(SELECTORS.photos).toContain('svg:has(image)');
   });
 
+  it('blindagem por região usa containers estáveis (imune ao DOM interno)', () => {
+    expect(SELECTORS.shieldList).toBe('#pane-side');
+    expect(SELECTORS.shieldChat).toBe('#main');
+  });
+
   it('recent (prévias) cobre row e listitem, sem exigir dir', () => {
     expect(SELECTORS.recent).toContain('[role="row"]');
     expect(SELECTORS.recent).toContain('[role="listitem"]');
