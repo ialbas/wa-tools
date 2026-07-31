@@ -5,6 +5,7 @@ node_modules/
 # Tooling de desenvolvimento (não faz parte do produto — fora do repo público)
 .claude/
 .specify/
+specs/
 
 dist/
 coverage/
